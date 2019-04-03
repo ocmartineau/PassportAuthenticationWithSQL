@@ -2,6 +2,7 @@ const express = require('express');
 const passport   = require('passport');
 const session    = require('express-session');
 const bodyParser = require('body-parser');
+const exphbs = require('express-handlebars')
 // const env = require('dotenv').load();
 
 const app = express();
@@ -47,3 +48,13 @@ app.use(session({ secret: 'keyboard cat',resave: true, saveUninitialized:true}))
 app.use(passport.initialize());
 
 app.use(passport.session()); // persistent login sessions
+
+//For Handlebars
+app.set('views', './app/views')
+app.engine('hbs', exphbs({
+    extname: '.hbs'
+}));
+app.set('view engine', '.hbs');
+
+//Routes
+const authRoute = require('./app/routes/auth.js')(app);
