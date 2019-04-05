@@ -57,4 +57,7 @@ app.engine('hbs', exphbs({
 app.set('view engine', '.hbs');
 
 //Routes
-const authRoute = require('./app/routes/auth.js')(app);
+const authRoute = require('./app/routes/auth.js')(app, passport);
+
+//load passport strategies
+require('./app/config/passport/passport.js')(passport, models.user);
