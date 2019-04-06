@@ -14,7 +14,19 @@ module.exports = function(app, passport) {
 
     ));
 
-    app.get('/dashboard',authController.dashboard);
+    app.get('/logout',authController.logout);
+
+    app.get('/dashboard',isLoggedIn, authController.dashboard);
+
+    function isLoggedIn(req, res, next) {
+
+        if (req.isAuthenticated())
+
+            return next();
+            // alert("Please log in to see the dashboard.");
+        res.redirect('/signin');
+
+    }
 
 };
 
