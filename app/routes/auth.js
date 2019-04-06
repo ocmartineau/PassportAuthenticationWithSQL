@@ -7,12 +7,14 @@ module.exports = function(app, passport) {
     app.get('/signin', authController.signin);
 
     app.post('/signup', passport.authenticate('local-signup', {
-            successRedirect: '/dashboard', //dashboard of a signed in user
+            successRedirect: '/dashboard',
 
             failureRedirect: '/signup'
         }
 
     ));
+
+    app.get('/dashboard',authController.dashboard);
 
 };
 
